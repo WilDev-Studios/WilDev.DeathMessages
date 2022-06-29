@@ -1,0 +1,2 @@
+Enabled: true # If the plugin should be enabled - Must be a boolean value
+Death-Message-Image-URL: example.death.message.com/image_death.png # Image that the death message will display - Must be a string value with double/single quotes
