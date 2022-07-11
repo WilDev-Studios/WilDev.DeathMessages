@@ -78,6 +78,12 @@ namespace WilDev.DeathMessages
             if (m_Configuration.GetSection("Enabled").Get<bool>() == true)
             {
                 UnturnedUser unturnedUser = m_UnturnedUserDirectory.FindUser(@event.Player.SteamId);
+
+                if (unturnedUser == null)
+                {
+                    return Task.CompletedTask;
+                }
+
                 UnturnedUser instigatorUser = m_UnturnedUserDirectory.FindUser(@event.Instigator);
                 Vector3 playerPosition = unturnedUser.Player.Transform.Position;
                 Vector3 instigatorPosition = instigatorUser.Player.Transform.Position;
