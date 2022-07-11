@@ -12,9 +12,9 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>disable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
-    <Version>1.0.0</Version>
-    <InformationalVersion>1.0.0</InformationalVersion>
-    <PackageVersion>1.0.0</PackageVersion>
+    <Version>1.0.1</Version>
+    <InformationalVersion>1.0.1</InformationalVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>WilDev Studios</Authors>
     <PackageAuthor>WilDev Studios</PackageAuthor>
     <Company>WilDev Studios</Company>
