@@ -19,7 +19,7 @@ Death-Message-Image-URL: example.death.message.com/image_death.png # Image that 
 # Player - The Unturned player that died
 # Instigator - The Unturned user that killed Player (can be none)
 # Weapon - The weapon that was used to kill Player (can be none)
-# Distance - The distance at which Player was killed
+# Distance - The distance at which Player was killed (can be none)
 # Location - The location where Player died
 
 Deaths:
