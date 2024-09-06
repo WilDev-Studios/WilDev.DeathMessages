@@ -75,31 +75,34 @@ namespace WilDev.DeathMessages
 
         public Task HandleEventAsync(object sender, UnturnedPlayerDeathEvent @event)
         {
-            if (m_Configuration.GetSection("Enabled").Get<bool>() == true)
+            if (m_Configuration.GetSection("Enabled").Get<bool>())
             {
                 UnturnedUser unturnedUser = m_UnturnedUserDirectory.FindUser(@event.Player.SteamId);
-
                 if (unturnedUser == null)
                 {
                     return Task.CompletedTask;
                 }
 
                 UnturnedUser instigatorUser = m_UnturnedUserDirectory.FindUser(@event.Instigator);
+
                 Vector3 playerPosition = unturnedUser.Player.Transform.Position;
-                Vector3 instigatorPosition = instigatorUser.Player.Transform.Position;
-                float distance = Vector3.Distance(playerPosition, instigatorPosition);
                 UnturnedLocation location = m_UnturnedLocationDirectory.GetNearestLocation(playerPosition);
 
                 string deathCauseRaw = @event.DeathCause.ToString().ToLower();
                 string deathCause = char.ToUpper(deathCauseRaw[0]) + deathCauseRaw.Substring(1);
 
+                string instigatorName = instigatorUser?.DisplayName ?? "Unknown";
+                string weaponName = instigatorUser?.Player.Player.equipment?.asset?.itemName ?? "None";
+                float distance = instigatorUser != null ? Vector3.Distance(instigatorUser.Player.Transform.Position, playerPosition) : 0;
+                string locationName = location?.ToString() ?? "Unknown";
+
                 ChatManager.serverSendMessage(m_StringLocalizer[$"Deaths:{deathCause}", new
                 {
                     Player = unturnedUser.DisplayName,
-                    Instigator = instigatorUser.DisplayName,
-                    Weapon = instigatorUser.Player.Player.equipment.asset.itemName,
+                    Instigator = instigatorName,
+                    Weapon = weaponName,
                     Distance = distance,
-                    Location = location
+                    Location = locationName
                 }], UnityEngine.Color.green, null, null, EChatMode.GLOBAL, m_Configuration.GetSection("Death-Message-Image-URL").Get<string>(), true);
             }
             else
@@ -109,5 +112,6 @@ namespace WilDev.DeathMessages
 
             return Task.CompletedTask;
         }
+
     }
 }
