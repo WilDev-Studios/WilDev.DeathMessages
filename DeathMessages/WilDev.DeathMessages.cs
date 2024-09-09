@@ -94,7 +94,8 @@ namespace WilDev.DeathMessages
                 string instigatorName = instigatorUser?.DisplayName ?? "Unknown";
                 string weaponName = instigatorUser?.Player.Player.equipment?.asset?.itemName ?? "None";
                 float distance = instigatorUser != null ? Vector3.Distance(instigatorUser.Player.Transform.Position, playerPosition) : 0;
-                string locationName = location?.ToString() ?? "Unknown";
+                string locationName = location?.Name ?? "Unknown";
+                byte instigatorHealth = instigatorUser?.Player.Player.life.health ?? 0;
 
                 ChatManager.serverSendMessage(m_StringLocalizer[$"Deaths:{deathCause}", new
                 {
@@ -102,7 +103,8 @@ namespace WilDev.DeathMessages
                     Instigator = instigatorName,
                     Weapon = weaponName,
                     Distance = distance,
-                    Location = locationName
+                    Location = locationName,
+                    InstigatorHP = instigatorHealth
                 }], UnityEngine.Color.green, null, null, EChatMode.GLOBAL, m_Configuration.GetSection("Death-Message-Image-URL").Get<string>(), true);
             }
             else
