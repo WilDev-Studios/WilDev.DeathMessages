@@ -7,7 +7,6 @@ using OpenMod.Unturned.Plugins;
 using OpenMod.API.Plugins;
 using OpenMod.API.Eventing;
 using OpenMod.Unturned.Players.Life.Events;
-using OpenMod.Extensions.Games.Abstractions.Entities;
 using System.Threading.Tasks;
 using OpenMod.Unturned.Users;
 using System.Numerics;
@@ -95,7 +94,7 @@ namespace WilDev.DeathMessages
                 string instigatorName = instigatorUser?.DisplayName ?? "Unknown";
                 string weaponName = instigatorUser?.Player.Player.equipment?.asset?.itemName ?? "None";
                 float distance = instigatorUser != null ? Vector3.Distance(instigatorUser.Player.Transform.Position, playerPosition) : 0;
-                string locationName = location?.ToString() ?? "Unknown";
+                string locationName = location?.Name ?? "Unknown";
                 byte instigatorHealth = instigatorUser?.Player.Player.life.health ?? 0;
 
                 ChatManager.serverSendMessage(m_StringLocalizer[$"Deaths:{deathCause}", new
